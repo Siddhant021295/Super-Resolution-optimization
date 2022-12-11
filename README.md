@@ -125,3 +125,37 @@ config_list = [{
         'op_types': ['Conv2d']
     }]
 ```
+
+
+Hyperparameter Optimization
+
+Thereafter, we performed hyperparameter optimization on the pruned VDSR super resolution model to obtain optimal values for the hyperparameters that are being used in our training process. The optimization of these hyperparameters will help us obtain as minimal a loss as possible and thus improve the model super resolution capability.
+We used TPE Tuner technique for performing the HPO optimization on our pruned VDSR super resolution model
+We used TPE Tune because it uses distributions of the configuration prior with non-parametric densities and we were able to obtain better results with this tuner.
+
+Tree-structured Parzen Estimator (TPE) tuner: TPE is a lightweight tuner that has no extra dependency and supports all search space types, designed to be the default tuner. It has the drawback that TPE cannot discover relationships between different hyperparameters.
+Implementation: TPE is an SMBO algorithm. It models P(x|y) and P(y) where x represents hyperparameters and y the evaluation result. P(x|y) is modeled by transforming the generative process of hyperparameters, replacing the distributions of the configuration prior with non-parametric densities
+
+Parameters:
+optimze_mode (Literal['minimize', 'maximize']) – Whether optimize to minimize or maximize trial result.
+seed (int | None) – The random seed.
+tpe_args (dict[str, Any] | None) – Advanced users can use this to customize TPE tuners. 
+
+HPO Configuration Used
+config.tuner.name = 'TPE'
+config.tuner.class_args = {
+    'optimize_mode': minimize
+}
+```
+Search Space
+search_space = {
+    'weight_decay'  	: {'_type': 'choice', '_value': [1e-4,1e-5]},
+    'lr'            		: {'_type': 'loguniform', '_value': [0.05, 1]},
+    'momentum'      	: {'_type': 'uniform', '_value': [0, 1]},
+    'batchSize'     	: {'_type': 'choice', '_value': [64, 128, 256, 512]},
+    'clip'         	 	: {'_type': 'uniform', '_value': [0, 1]}
+}
+```
+We run 10 trials with the given search space configuration and compare the final loss of each trial to determine the optimal hyperparameters with the least reported loss.
+The least loss reported with this experiment is 197.26 and the time taken by these sets of trials is around 2 min 57 sec. 
+
