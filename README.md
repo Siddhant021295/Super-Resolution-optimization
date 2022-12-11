@@ -164,3 +164,32 @@ The least loss reported with this experiment is 197.26 and the time taken by the
 
 <img width="526" alt="image" src="https://user-images.githubusercontent.com/22122136/206886618-0c6408c0-b503-459e-85bc-91c639d56b28.png">
 
+
+3. Performance of Original Model and Optimized Variants
+
+Metrics used for Comparing Performance:
+
+Quality: PSNR is used as the metric of quality. Most of the existing super resolution models already use it or some variant of it (e.g., PSNR-Y) in the validation process.  
+Speed: The inference speed is measured by XGen on a Samsung S10 cellphone.
+Size: The size of the model refers to the size of the ONNX file of the DNN model.
+
+Original Model:
+
+We performed training on the original VDSR super resolution model and calculated its inference time on the server.
+
+	Server Inference Time - 1.743 sec
+
+During the evaluation process of our original VDSR Super Resolution Model, we also calculated its PSNR Value.
+
+	Input bicubic PSNR for images scaled down by 2 - 33.690
+Original Model Average PSNR for images scaled down by 2  - 37.652
+Input bicubic PSNR for images scaled down by 3 - 30.407
+Original Model Average PSNR for images scaled down by 3  - 33.773
+Input bicubic PSNR for images scaled down by 4 - 28.414
+Original Model Average PSNR for images scaled down by 4  - 31.464
+
+Lastly, we converted our original model into its ONNX format and performed XGen inference test on it to obtain its inference time on a mobile device, and also noted the ONNX file size.
+
+XGen ONNX Inference Time - 344.83 msec
+ONNX File Size - 2.8 MB
+
