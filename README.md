@@ -8,6 +8,7 @@ Very Deep Convolutional Networks"(http://cv.snu.ac.kr/research/VDSR/) in PyTorch
 - With very deep networks, however, convergence speed becomes a critical issue during training. The approach proposes a simple yet effective training procedure. 
 - It learns residuals only and uses extremely high learning rates, enabled by adjustable gradient clipping. According to the research paper, the proposed method performs better than existing methods in accuracy and visual improvements and the results are easily noticeable.
 
+<img width="486" alt="image" src="https://user-images.githubusercontent.com/22122136/206886543-dc049daa-ae29-4e94-a9d8-9eb13ea38213.png">
 
 
 ## Usage
@@ -97,3 +98,30 @@ From left to right are ground truth, bicubic and vdsr
   <img src='result/input.bmp' height='200' width='200'/>
   <img src='result/output.bmp' height='200' width='200'/>
 </p>
+
+
+### Experiment 
+
+2. Optimizations Applied
+
+Pruning
+
+We initially performed pruning on the original VDSR super resolution model to obtain a smaller architecture DNN model that will perform super resolution on input images faster such that the model is optimized for mobile devices.
+We have used the F1 Pruner technique for performing the pruning optimization on our VDSR super resolution model.
+We used the F1 pruner because we obtain the highest increment in PSNR Ratio while using the level pruner at a sparsity of 0.5
+
+L1 Pruner: L1 norm pruner computes the l1 norm of the layer weight on the first dimension, then prune the weight blocks on this dimension with smaller l1 norm values. i.e., compute the l1 norm of the filters in the convolution layer as metric values, compute the l1 norm of the weight by rows in the linear layer as metric values.
+
+Parameters:
+model (Module) – Model to be pruned.
+config_list (List[Dict]) –
+Supported keys: sparsity, sparsity_per_layer, op_types, op_names, op_partial_names, exclude 
+mode (str) – ‘normal’ or ‘balance’
+dummy_input
+```
+Configuration Used
+config_list = [{
+        'sparsity': 0.5,
+        'op_types': ['Conv2d']
+    }]
+```
