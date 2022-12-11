@@ -160,3 +160,7 @@ We run 10 trials with the given search space configuration and compare the final
 The least loss reported with this experiment is 197.26 and the time taken by these sets of trials is around 2 min 57 sec. 
 
 <img width="486" alt="image" src="https://user-images.githubusercontent.com/22122136/206886601-57fec29d-f1e4-452f-92f5-6ba2ae2cddda.png">
+
+
+<img width="526" alt="image" src="https://user-images.githubusercontent.com/22122136/206886618-0c6408c0-b503-459e-85bc-91c639d56b28.png">
+
