@@ -2,6 +2,14 @@
 Implementation of CVPR2016 Paper: "Accurate Image Super-Resolution Using 
 Very Deep Convolutional Networks"(http://cv.snu.ac.kr/research/VDSR/) in PyTorch
 
+- VDSR is a deep learning approach for enlarging an image.
+- The method uses a deep convolutional network inspired by VGG-net used for ImageNet classification. 
+- Increasing the network depth shows a significant improvement in accuracy. The final model uses 20 weight layers. By cascading small filters many times in a deep network structure, contextual information over large image regions is exploited in an efficient way. 
+- With very deep networks, however, convergence speed becomes a critical issue during training. The approach proposes a simple yet effective training procedure. 
+- It learns residuals only and uses extremely high learning rates, enabled by adjustable gradient clipping. According to the research paper, the proposed method performs better than existing methods in accuracy and visual improvements and the results are easily noticeable.
+
+
+
 ## Usage
 ### Training
 ```
